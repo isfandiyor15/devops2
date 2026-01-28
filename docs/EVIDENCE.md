@@ -96,7 +96,10 @@ User must capture screenshots of:
    ![Metrics](screenshots/metrics-proof.png)
 5. [x] **Grafana Explore**: Query results for RPS, Error Rate, and P95 Latency.
    ![Grafana Dashboard](screenshots/grafana-dashboard.png)
-6. [ ] **Lens/Kubectl**: Showing `pg-postgresql` StatefulSet (Ready) and `myapp` Pods (Running).
+6. [x] **Lens/Kubectl**: Showing `pg-postgresql` StatefulSet (Ready) and `myapp` Pods (Running).
+   ![Lens Pods](screenshots/lens-pods.png)
+   ![Lens PVC](screenshots/lens-pvc.png)
+   ![Lens Services](screenshots/lens-services.png)
 
 ## Manual GitHub Setting
 - Go to **GitHub -> Profile -> Packages -> devops2 -> Package settings**.
