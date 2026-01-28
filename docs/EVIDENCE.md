@@ -94,7 +94,8 @@ User must capture screenshots of:
    ![Browser UI](screenshots/ui-proof.png)
 4. [x] **Metrics**: `http://localhost:8080/metrics` output containing `http_requests_total`.
    ![Metrics](screenshots/metrics-proof.png)
-5. [ ] **Grafana Explore**: Query results for RPS, Error Rate, and P95 Latency.
+5. [x] **Grafana Explore**: Query results for RPS, Error Rate, and P95 Latency.
+   ![Grafana Dashboard](screenshots/grafana-dashboard.png)
 6. [ ] **Lens/Kubectl**: Showing `pg-postgresql` StatefulSet (Ready) and `myapp` Pods (Running).
 
 ## Manual GitHub Setting
