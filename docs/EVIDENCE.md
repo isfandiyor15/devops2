@@ -86,10 +86,14 @@ Use these in Grafana Explore or Prometheus UI:
 
 ## Manual Evidence Checklist
 User must capture screenshots of:
-1. [ ] **GitHub Actions**: Green run for `build-and-test`.
-2. [ ] **GHCR Packages**: Package page showing `latest` and `sha` tags.
-3. [ ] **Browser UI**: `http://localhost:8080` showing products list.
-4. [ ] **Metrics**: `http://localhost:8080/metrics` output containing `http_requests_total`.
+1. [x] **GitHub Actions**: Green run for `build-and-test`.
+   ![GitHub Actions](screenshots/github-actions.png)
+2. [x] **GHCR Packages**: Package page showing `latest` and `sha` tags.
+   ![GHCR Packages](screenshots/ghcr-packages.png)
+3. [x] **Browser UI**: `http://localhost:8080` showing products list.
+   ![Browser UI](screenshots/ui-proof.png)
+4. [x] **Metrics**: `http://localhost:8080/metrics` output containing `http_requests_total`.
+   ![Metrics](screenshots/metrics-proof.png)
 5. [ ] **Grafana Explore**: Query results for RPS, Error Rate, and P95 Latency.
 6. [ ] **Lens/Kubectl**: Showing `pg-postgresql` StatefulSet (Ready) and `myapp` Pods (Running).
 
