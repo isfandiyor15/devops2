@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps 2 App</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .product { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input { padding: 8px; width: 100%; box-sizing: border-box; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #status { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Product Manager</h1>
+    
+    <div id="status"></div>
+
+    <h2>Add Product</h2>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Product Name">
+    </div>
+    <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" id="price" placeholder="Price">
+    </div>
+    <button onclick="addProduct()">Add Product</button>
+
+    <h2>Products</h2>
+    <div id="products"></div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const productsDiv = document.getElementById('products');
+
+        async function fetchProducts() {
+            try {
+                const res = await fetch('/products');
+                if (!res.ok) throw new Error('Failed to fetch products');
+                const products = await res.json();
+                productsDiv.innerHTML = products.map(p => `
+                    <div class="product">
+                        <strong>${p.name}</strong> - $${p.price}<br>
+                        <small>ID: ${p.id}</small>
+                    </div>
+                `).join('');
+            } catch (err) {
+                statusDiv.innerText = 'Error: ' + err.message;
+                statusDiv.style.color = 'red';
+            }
+        }
+
+        async function addProduct() {
+            const name = document.getElementById('name').value;
+            const price = document.getElementById('price').value;
+            
+            try {
+                const res = await fetch('/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, price })
+                });
+                
+                if (!res.ok) throw new Error('Failed to add product');
+                
+                document.getElementById('name').value = '';
+                document.getElementById('price').value = '';
+                statusDiv.innerText = 'Product added successfully!';
+                statusDiv.style.color = 'green';
+                fetchProducts();
+            } catch (err) {
+                statusDiv.innerText = 'Error: ' + err.message;
+                statusDiv.style.color = 'red';
+            }
+        }
+
+        // Check health
+        fetch('/healthz').then(res => {
+            if(res.ok) console.log('Backend healthy');
+        });
+
+        fetchProducts();
+    </script>
+</body>
+</html>

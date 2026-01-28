@@ -1,0 +1,9 @@
+auth:
+  username: appuser
+  password: apppass
+  database: appdb
+
+primary:
+  persistence:
+    enabled: true
+    size: 1Gi
