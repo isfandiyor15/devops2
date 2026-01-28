@@ -55,6 +55,10 @@ jobs:
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,format=long
+          labels: |
+            org.opencontainers.image.source=https://github.com/isfandiyor15/devops2
+            org.opencontainers.image.title=devops2
+            org.opencontainers.image.description=DevOps assignment app
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
