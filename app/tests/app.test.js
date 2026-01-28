@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app, server, pgClient } = require('../src/index');
+const { app, server } = require('../src/index');
 
 // Mock PG Client
 jest.mock('pg', () => {
