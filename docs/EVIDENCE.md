@@ -153,3 +153,30 @@ User must capture screenshots of:
 1. [x] **Grafana Explore**: Select `Loki` datasource.
 2. [x] **Log Query**: Run `{app="myapp"}` or `{namespace="app"}` to see logs.
    ![Loki Logs](screenshots/grafana-loki-logs.png)
+
+## GitOps (ArgoCD) Evidence
+
+### 1. Installation & Status
+```powershell
+# Check ArgoCD Components
+kubectl get pods -n argocd
+```
+
+### 2. Verify Application Sync
+```powershell
+# Check Application Status
+kubectl get application -n argocd devops2-app
+```
+Expected Output: `SYNC STATUS: Synced`, `HEALTH STATUS: Healthy`.
+
+### 3. CI/CD Loop Evidence
+1.  **GitHub Action** builds and pushes image (tag: `sha-xxxx`).
+2.  **GitHub Action** commits `sha-xxxx` to `helm/myapp/values.yaml`.
+3.  **ArgoCD** detects change and updates deployment.
+
+### 4. Manual Evidence
+User must capture screenshots of:
+1. [x] **ArgoCD Pods**: `kubectl get pods -n argocd` (All Running).
+   ![ArgoCD Pods](screenshots/argocd-pods.png)
+2. [x] **ArgoCD App Status**: `kubectl get application -n argocd` (Healthy).
+   ![ArgoCD App](screenshots/argocd-app.png)

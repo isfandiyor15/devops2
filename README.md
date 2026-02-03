@@ -13,7 +13,8 @@ A complete DevOps implementation featuring a Node.js application deployed on Kub
 - **Database**: PostgreSQL (Bitnami Helm Chart) with Persistent Volume.
 - **Monitoring**: Prometheus & Grafana (kube-prometheus-stack).
 - **Deployment**: Custom Helm Chart.
-- **CI/CD**: GitHub Actions (Lint, Test, Build, Push).
+- **CI/CD**: GitHub Actions (Lint, Test, Build, Push) + GitOps.
+- **GitOps**: ArgoCD (Automated syncing from Helm chart).
 - **Registry**: GitHub Container Registry (GHCR).
 
 ## 🛠 Prerequisites
@@ -55,6 +56,17 @@ helm upgrade --install pg bitnami/postgresql -n app -f infra/db/values-postgres.
 ```powershell
 # Using the Helm Chart
 helm upgrade --install myapp ./helm/myapp -n app --wait
+```
+
+### 4. Setup GitOps (ArgoCD)
+Instead of manual Helm deployment, use ArgoCD for continuous delivery:
+```powershell
+# 1. Install ArgoCD
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# 2. Deploy Application
+kubectl apply -f argocd/application.yaml
 ```
 
 ### 4. Access the Application
