@@ -85,10 +85,16 @@ jobs:
           wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
           chmod +x /usr/local/bin/yq
           
-          # Update values.yaml
-          yq -i ".image.tag = \"${{ steps.meta.outputs.version }}\"" helm/myapp/values.yaml
+          # Update values.yaml with specific SHA
+          # Corresponds to type=sha,format=long in metadata-action
+          NEW_TAG="sha-${{ github.sha }}"
+          yq -i ".image.tag = \"$NEW_TAG\"" helm/myapp/values.yaml
           
           # Commit and push
           git add helm/myapp/values.yaml
-          git commit -m "chore: update image tag to ${{ steps.meta.outputs.version }} [skip ci]"
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: update image tag to $NEW_TAG [skip ci]"
           git push

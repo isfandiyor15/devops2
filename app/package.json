@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint src tests"
   },
   "keywords": [],
