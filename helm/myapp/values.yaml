@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/isfandiyor15/devops2
   pullPolicy: IfNotPresent
-  tag: "latest" # This will be updated by CI
+  tag: "sha-b328f2b8cacd45ad66ed4a1e0f4590543f65c387" # This will be updated by CI
 replicaCount: 1
 service:
   type: ClusterIP
